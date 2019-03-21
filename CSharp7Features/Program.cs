@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharp7Features
 {
@@ -10,11 +7,17 @@ namespace CSharp7Features
     {
         static void Main(string[] args)
         {
-            var tuples = new Tuples();
+            //var tuples = new Tuples();
 
-            var (_, _, person) = tuples.MatchPerson("My Name");
+            //var (_, _, person) = tuples.MatchPerson("My Name");
 
-            var name = person.Name;
+            //var name = person.Name;
+            
+            //var nubers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+            //nubers.FindAll(x => x < 4).ForEach(DisplayStr);
+
+            //void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.nr} found at index {input.index}");
         }
     }
 }
