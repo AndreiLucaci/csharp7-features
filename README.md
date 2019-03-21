@@ -4,9 +4,12 @@
 
 <a id="tb"></a>
 # Table of contents:
-1. [Tuple types and tuple literals](#tuple-type)
+1. [`tuple types` and `tuple literals`](#tuple-type)
 2. [Variable deconstruction](#var-dec)
 3. [Local functions](#lcl-func)
+4. [Pattern matching](#pat-match)
+5. [`ref` as a return value](#ref)
+6. [Expression body modifiers](#exp)
 
 <a id="tuple-type"></a>
 ## 1. Tuple types and tuple literals | [Top](#tb) | [Next section](#var-dec)
@@ -149,7 +152,7 @@ void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.
 ```
 
 <a id="pat-match"></a>
-## 4. Pattern matching | [Top](#tb) | [Next section](#ref) | [Prev section](#lcl-fnc)
+## 4. Pattern matching | [Top](#tb) | [Next section](#ref) | [Prev section](#lcl-func)
 In C# 7.0 we now have the idea of pattern patching, which extends over the existing pattern matching that C# offers.
 
 ### 1. `is`-expressions
@@ -218,7 +221,7 @@ Also, it's worth noticing that the `order` of the case clauses now matters, sinc
 The pattern variables in the `case`s clauses are scope only to the switch section.
 
 <a id="ref"></a>
-## 5. `ref` as a return value | [Top](#tb) | [Next section]() | [Prev section](#pat-match)
+## 5. `ref` as a return value | [Top](#tb) | [Next section](#exp) | [Prev section](#pat-match)
 With C# 7.0 we are now able to return values having the `ref` modifier, and store them in local variables.
 
 Here's an example:
@@ -253,7 +256,7 @@ and the output:
 1, 2147483647, 3, 4
 ```
 
-<a id="ref"></a>
+<a id="exp"></a>
 ## 6. Expression body modifiers | [Top](#tb) | [Prev section](#ref)
 C# 7.0 extends the default expresion bodied methods to `construtor`s, `finalizer`s and `accessor`s. Here's an example:
 
@@ -277,3 +280,16 @@ public class ExpressionBody
     }
 }
 ```
+
+## + other features, breafly mentioned:
+- Throw expressions
+- Generalized async return types
+- Literal improvements
+- Out variables
+
+# Sources and good information links with more in depth
+You can find more information about this on these links:
+- [dev blog post](https://devblogs.microsoft.com/dotnet/new-features-in-c-7-0/)
+- [official github page of C# lang](https://github.com/dotnet/csharplang)
+- [in depth explanation](https://www.c-sharpcorner.com/article/c-sharp-7-0-and-c-sharp-7-1-new-features-part-two/)
+- [c# 7.x](https://www.dotnetcurry.com/csharp/1437/csharp-7-1-7-2-7-3-new-features)
