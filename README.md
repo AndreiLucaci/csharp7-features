@@ -141,12 +141,78 @@ public static void ForEach<T>(this IEnumerable<T> input, Action<T> action)
 we could have something like this:
 
 ```csharp
-var nubers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+var numbers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-nubers.FindAll(x => x < 4).ForEach(DisplayStr);
+numbers.FindAll(x => x < 4).ForEach(DisplayStr);
 
 void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.nr} found at index {input.index}"); // this is also a local function, but without body
 ```
 
 <a id="pat-match"></a>
 ## 4. Pattern matching | [Top](#tb) | [Next section]() | [Prev section](#lcl-fnc)
+In C# 7.0 we now have the idea of pattern patching, which extends over the existing pattern matching that C# offers.
+
+### 1. `is`-expressions
+
+Here's a small example of the pattern matching
+
+Consider we have this structure
+```csharp
+public interface IA { string SomeString { get; set; } }
+
+public interface IB : IA { string SomeOtherString { get; set; } }
+
+public class A : IA { public string SomeString { get; set; } = nameof(SomeString); }
+
+public class B : A, IB { public string SomeOtherString { get; set; } = nameof(SomeOtherString); }
+```
+
+The pattern matching automatically creates and assigns the value to the variable in one go:
+
+```csharp 
+var (obj1, obj2) = GetObjs();
+
+if (obj2 is A a) { Console.WriteLine(a.SomeString);} // this will hit
+if (obj1 is B b) { Console.WriteLine(b.SomeOtherString); } // this is false
+else { Console.WriteLine($"{obj1.GetType()} is not of type {typeof(B)}"); } // if we are to use the "b" variable in the else clause we would get a compilation error as such: 
+                                                                            // Error	CS0165	Use of unassigned local variable 'b'	
+
+
+(IA obj1, IB obj2) GetObjs() => (new A(), new B());
+```
+
+and the output
+```console
+SomeString
+CSharp7Features.A is not of type CSharp7Features.B
+```
+
+Note: there are two types of pattern matching: `constant pattern` and `type pattern`. 
+- `constant pattern` matches to a constant such as `obj is null`.
+- `type pattern` matches to a type such as `obj is IA a`
+
+### 2. `swich` statements
+The guys from Microsoft also extended the `switch` statement so that we can switch also on any type, and introduced pattern matching in the `case` clauses. Using the same structure as above, we can have.
+
+```csharp
+IA obj = new B();
+
+switch (obj)
+{
+    case null:
+        Console.WriteLine($"Object is null");
+        break;
+    case B b:
+        Console.WriteLine(b.SomeOtherString);
+        break;
+    case A a:
+        Console.WriteLine(a.SomeString);
+        break;
+    default:
+        throw new ArgumentOutOfRangeException(nameof(obj));
+}
+```
+
+Also, it's worth noticing that the `order` of the case clauses now matters, since in the above example, switching the `case B b:` with `case A a:`, for `IA obj = new B()` would always trigger the `case A a:`, and never get to `case B b:`. Compiling with such a case would then yield this:  `Error	CS8120	The switch case has already been handled by a previous case.`.
+
+The pattern variables in the `case`s clauses are scope only to the switch section.
