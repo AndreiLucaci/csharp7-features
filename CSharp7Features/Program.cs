@@ -13,11 +13,15 @@ namespace CSharp7Features
 
             //var name = person.Name;
             
-            //var nubers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            //var numbers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-            //nubers.FindAll(x => x < 4).ForEach(DisplayStr);
+            //numbers.FindAll(x => x < 4).ForEach(DisplayStr);
 
             //void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.nr} found at index {input.index}");
+
+            var patternMatching = new PatternMatching();
+            
+            patternMatching.TestSwitchPatternMatching();
         }
     }
 }
