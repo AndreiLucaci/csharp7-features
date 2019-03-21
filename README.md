@@ -10,6 +10,9 @@
 4. [Pattern matching](#pat-match)
 5. [`ref` as a return value](#ref)
 6. [Expression body modifiers](#exp)
+7. [others](#oth)
+
+[Sources](#source)
 
 <a id="tuple-type"></a>
 ## 1. Tuple types and tuple literals | [Top](#tb) | [Next section](#var-dec)
@@ -257,7 +260,7 @@ and the output:
 ```
 
 <a id="exp"></a>
-## 6. Expression body modifiers | [Top](#tb) | [Prev section](#ref)
+## 6. Expression body modifiers | [Top](#tb) | [Next section](#oth) | [Prev section](#ref)
 C# 7.0 extends the default expresion bodied methods to `construtor`s, `finalizer`s and `accessor`s. Here's an example:
 
 ```csharp
@@ -280,14 +283,17 @@ public class ExpressionBody
     }
 }
 ```
-
-## + other features, breafly mentioned:
+<a id="oth"></a>
+## + other features, breafly mentioned: | [Top](#tb) | [Next section](#source) | [Prev section](#exp)
 - Throw expressions
 - Generalized async return types
 - Literal improvements
 - Out variables
 
-# Sources and good information links with more in depth
+<a id="source"></a>
+# Sources and good information links with more in depth | <img src="https://i.kym-cdn.com/photos/images/original/001/376/663/aa6.jpg" width="100" /> 
+
+
 You can find more information about this on these links:
 - [dev blog post](https://devblogs.microsoft.com/dotnet/new-features-in-c-7-0/)
 - [official github page of C# lang](https://github.com/dotnet/csharplang)
