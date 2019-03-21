@@ -149,7 +149,7 @@ void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.
 ```
 
 <a id="pat-match"></a>
-## 4. Pattern matching | [Top](#tb) | [Next section]() | [Prev section](#lcl-fnc)
+## 4. Pattern matching | [Top](#tb) | [Next section](#ref) | [Prev section](#lcl-fnc)
 In C# 7.0 we now have the idea of pattern patching, which extends over the existing pattern matching that C# offers.
 
 ### 1. `is`-expressions
@@ -216,3 +216,39 @@ switch (obj)
 Also, it's worth noticing that the `order` of the case clauses now matters, since in the above example, switching the `case B b:` with `case A a:`, for `IA obj = new B()` would always trigger the `case A a:`, and never get to `case B b:`. Compiling with such a case would then yield this:  `Error	CS8120	The switch case has already been handled by a previous case.`.
 
 The pattern variables in the `case`s clauses are scope only to the switch section.
+
+<a id="ref"></a>
+## 4. `ref` as a return value | [Top](#tb) | [Next section]() | [Prev section](#pat-match)
+With C# 7.0 we are now able to return values having the `ref` modifier, and store them in local variables.
+
+Here's an example:
+Having:
+```csharp
+private ref int GetRefItem(int[] nrs, int index)
+{
+    if (index < 0 || index > nrs.Length) throw new ArgumentOutOfRangeException();
+
+    return ref nrs[index];
+}
+```
+
+we now can do this:
+
+```csharp
+void PrintItems (IEnumerable<int> nrs) => Console.WriteLine(string.Join(", ", nrs));
+
+var items = new[] {1, 2, 3, 4};
+
+PrintItems(items); // 1, 2, 3, 4
+
+ref var item = ref GetRefItem(items, 1);
+item = int.MaxValue;
+
+PrintItems(items); // 1, 2147483647. 3, 4
+```
+
+and the output:
+```
+1, 2, 3, 4
+1, 2147483647, 3, 4
+```

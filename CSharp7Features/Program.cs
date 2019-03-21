@@ -19,9 +19,12 @@ namespace CSharp7Features
 
             //void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.nr} found at index {input.index}");
 
-            var patternMatching = new PatternMatching();
+            //var patternMatching = new PatternMatching();
             
-            patternMatching.TestSwitchPatternMatching();
+            //patternMatching.TestSwitchPatternMatching();
+
+            var testRef = new Ref();
+            testRef.TestRef();
         }
     }
 }
