@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionBody.cs" />
     <Compile Include="LocalFuncs.cs" />
     <Compile Include="PatternMatching.cs" />
     <Compile Include="Program.cs" />

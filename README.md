@@ -218,7 +218,7 @@ Also, it's worth noticing that the `order` of the case clauses now matters, sinc
 The pattern variables in the `case`s clauses are scope only to the switch section.
 
 <a id="ref"></a>
-## 4. `ref` as a return value | [Top](#tb) | [Next section]() | [Prev section](#pat-match)
+## 5. `ref` as a return value | [Top](#tb) | [Next section]() | [Prev section](#pat-match)
 With C# 7.0 we are now able to return values having the `ref` modifier, and store them in local variables.
 
 Here's an example:
@@ -251,4 +251,29 @@ and the output:
 ```
 1, 2, 3, 4
 1, 2147483647, 3, 4
+```
+
+<a id="ref"></a>
+## 6. Expression body modifiers | [Top](#tb) | [Prev section](#ref)
+C# 7.0 extends the default expresion bodied methods to `construtor`s, `finalizer`s and `accessor`s. Here's an example:
+
+```csharp
+public class ExpressionBody
+{
+    private static readonly ConcurrentDictionary<int, string> Names = new ConcurrentDictionary<int, string>();
+    private readonly int _id = new Random().Next(int.MaxValue);
+
+    // ctor
+    public ExpressionBody(string name) => Names.TryAdd(_id, name); 
+
+    // dctor
+    ~ExpressionBody() => Names.TryRemove(_id, out _);              
+
+    // accesors
+    public string Name
+    {
+        get => Names[_id];                                
+        set => Names[_id] = value;                        
+    }
+}
 ```
