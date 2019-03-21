@@ -107,5 +107,46 @@ var name = person.Name;
 ```
 
 <a id="lcl-func"></a>
-## 3. Local functions | [Top](#tb) | [Next section]() | [Prev section](#var-dec)
+## 3. Local functions | [Top](#tb) | [Next section](#pat-match) | [Prev section](#var-dec)
 C# 7.0 introduces the idea of local functions, "helper functions" that make sense inside methods, and nowhere else.
+
+Here's a small example:
+
+For this: 
+```csharp
+public static IEnumerable<(T, int index)> FindAll<T>(this IEnumerable<T> inputSource, Func<T, bool> what)
+{
+    return Find();
+
+    IEnumerable<(T, int index)> Find() // this is a local function
+    {
+        var counter = -1;
+        foreach (var item in inputSource)
+        {
+            counter++;
+            if (what(item)) yield return (item, counter);
+        }
+    }
+}
+
+public static void ForEach<T>(this IEnumerable<T> input, Action<T> action)
+{
+    foreach (var item in input)
+    {
+        action(item);
+    }
+}
+```
+
+we could have something like this:
+
+```csharp
+var nubers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+nubers.FindAll(x => x < 4).ForEach(DisplayStr);
+
+void DisplayStr((int nr, int index) input) => Console.WriteLine($"Number {input.nr} found at index {input.index}"); // this is also a local function, but without body
+```
+
+<a id="pat-match"></a>
+## 4. Pattern matching | [Top](#tb) | [Next section]() | [Prev section](#lcl-fnc)
